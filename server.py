@@ -372,8 +372,8 @@ class AgentGuardHandler(BaseHTTPRequestHandler):
 
 
 def main() -> None:
-    host = os.environ.get("AGENTGUARD_HOST", "127.0.0.1")
-    port = int(os.environ.get("AGENTGUARD_PORT", "8000"))
+    host = "0.0.0.0"
+    port = int(os.environ.get("PORT", "8000"))
     httpd = ThreadingHTTPServer((host, port), AgentGuardHandler)
     print(f"AgentGuard AI is ready at http://{host}:{port}")
     print("Simulation-only mode: no agent tools execute and no external requests are sent.")
