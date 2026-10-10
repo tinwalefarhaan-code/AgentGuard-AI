@@ -245,3 +245,154 @@ td:first-child { color: #7a8ba0; font: 8px "DM Mono", Consolas, monospace; white
   .decision-row { gap: 14px; }
   .risk-gauge { width: 108px; height: 108px; }
 }
+/* Advanced threat intelligence panel */
+.intel-panel {
+  margin: 17px 0;
+  padding: 15px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(89, 240, 224, .22);
+  border-radius: 11px;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(89, 240, 224, .08), transparent 55%),
+    linear-gradient(145deg, rgba(17, 29, 48, .96), rgba(8, 15, 27, .96));
+  box-shadow: inset 0 1px rgba(255,255,255,.04), 0 10px 28px rgba(0,0,0,.15);
+}
+
+.intel-panel::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--cyan), transparent);
+  box-shadow: 0 0 12px rgba(89,240,224,.35);
+}
+
+.intel-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.intel-icon {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(89,240,224,.25);
+  border-radius: 9px;
+  color: var(--cyan);
+  background: rgba(89,240,224,.07);
+  font-size: 18px;
+}
+
+.intel-heading > div {
+  display: grid;
+  gap: 4px;
+}
+
+.intel-heading strong {
+  font: 9px "DM Mono", Consolas, monospace;
+  letter-spacing: .07em;
+}
+
+.intel-heading small {
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.intel-live {
+  margin-left: auto;
+  color: var(--green);
+  font: 8px "DM Mono", Consolas, monospace;
+}
+
+.intel-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 15px 0;
+}
+
+.intel-stat {
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid rgba(133,163,205,.13);
+  border-radius: 7px;
+  background: rgba(5,11,22,.45);
+}
+
+.intel-stat > span {
+  display: block;
+  color: var(--muted);
+  font: 7px "DM Mono", Consolas, monospace;
+}
+
+.intel-stat > strong {
+  display: block;
+  margin-top: 7px;
+  overflow-wrap: anywhere;
+  color: var(--cyan);
+  font-size: 11px;
+}
+
+.intel-bars {
+  display: grid;
+  gap: 12px;
+}
+
+.intel-bar-row {
+  display: grid;
+  grid-template-columns: minmax(95px, 1.1fr) minmax(45px, 1fr) 26px;
+  align-items: center;
+  gap: 8px;
+}
+
+.intel-bar-row > span {
+  color: #b5c5d9;
+  font-size: 8px;
+}
+
+.intel-track {
+  height: 6px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: rgba(101,126,163,.18);
+}
+
+.intel-track > span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #247e91, var(--cyan));
+  box-shadow: 0 0 12px rgba(89,240,224,.25);
+  transition: width .55s cubic-bezier(.2,.8,.2,1);
+}
+
+.intel-bar-row > strong {
+  color: var(--text);
+  text-align: right;
+  font: 8px "DM Mono", Consolas, monospace;
+}
+
+.intel-disclaimer {
+  margin: 14px 0 0;
+  color: var(--dim);
+  font-size: 8px;
+  line-height: 1.6;
+}
+
+@media (max-width: 400px) {
+  .intel-panel { padding: 11px; }
+  .intel-grid { gap: 5px; }
+  .intel-stat { padding: 7px; }
+  .intel-stat > span { font-size: 6px; }
+  .intel-stat > strong { font-size: 9px; }
+  .intel-bar-row {
+    grid-template-columns: minmax(85px, 1fr) minmax(35px, .8fr) 23px;
+    gap: 5px;
+  }
+}

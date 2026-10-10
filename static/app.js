@@ -75,6 +75,46 @@ function renderDecision(result) {
       threats.append(tag);
     });
   }
+  function renderThreatIntelligence(result) {
+  const setPanelText = (selector, value) => {
+    const element = document.querySelector(selector);
+    if (element) element.textContent = value;
+  };
+
+  const threats = Array.isArray(result.threats) ? result.threats : [];
+
+  setPanelText("#threat-scan-status", "COMPLETE");
+  setPanelText("#threats-found", String(threats.length));
+  setPanelText("#threat-policy-status", result.decision || "REVIEW");
+
+  const categories = [
+    {
+      name: "Prompt Injection",
+      matches: threats.some((threat) => threat.includes("Prompt Injection")),
+    },
+    {
+      name: "Data Exposure",
+      matches: threats.some((threat) =>
+        threat.includes("Secret/Data Exfiltration"),
+      ),
+    },
+    {
+      name: "Malicious / Destructive Risk",
+      matches: threats.some((threat) =>
+        /Destructive|Dangerous Commands|Unauthorized Tool Usage/i.test(threat),
+      ),
+    },
+  ];
+
+  categories.forEach((category, index) => {
+    const element = document.querySelector(`#threat-category-${index + 1}`);
+    if (element) {
+      element.textContent = category.matches ? "DETECTED" : "CLEAR";
+      element.classList.toggle("threat-detected", category.matches);
+      element.classList.toggle("threat-clear", !category.matches);
+    }
+  });
+}
 }
 
 function renderToolchain(result) {

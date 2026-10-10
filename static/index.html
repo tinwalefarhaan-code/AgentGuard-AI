@@ -100,6 +100,54 @@
                 </div>
                 <div class="risk-meter-scale"><span>0 · LOW</span><span>100 · HIGH</span></div>
               </div>
+              <div class="intel-panel" id="threat-intelligence">
+  <div class="intel-heading">
+    <span class="intel-icon">◈</span>
+    <div>
+      <strong>THREAT INTELLIGENCE</strong>
+      <small>SIMULATED POLICY ANALYSIS</small>
+    </div>
+    <span class="intel-live">● ANALYZED</span>
+  </div>
+
+  <div class="intel-grid">
+    <div class="intel-stat">
+      <span>RISK BAND</span>
+      <strong id="intel-risk-band">PENDING</strong>
+    </div>
+    <div class="intel-stat">
+      <span>THREATS FOUND</span>
+      <strong id="intel-threat-total">0</strong>
+    </div>
+    <div class="intel-stat">
+      <span>POLICY STATUS</span>
+      <strong id="intel-policy-status">WAITING</strong>
+    </div>
+  </div>
+
+  <div class="intel-bars" id="intel-bars">
+    <div class="intel-bar-row">
+      <span>Prompt manipulation</span>
+      <div class="intel-track"><span id="intel-prompt-bar"></span></div>
+      <strong id="intel-prompt-value">—</strong>
+    </div>
+    <div class="intel-bar-row">
+      <span>Data exposure</span>
+      <div class="intel-track"><span id="intel-data-bar"></span></div>
+      <strong id="intel-data-value">—</strong>
+    </div>
+    <div class="intel-bar-row">
+      <span>Privilege / destructive risk</span>
+      <div class="intel-track"><span id="intel-action-bar"></span></div>
+      <strong id="intel-action-value">—</strong>
+    </div>
+  </div>
+
+  <p class="intel-disclaimer">
+    These indicators summarize detected categories. They are not independent
+    probabilities or a separate AI model.
+  </p>
+</div>
               <div class="result-divider"></div>
               <div class="result-block"><div class="result-label">PROPOSED TOOL / ACTION</div><div class="tool-chain" id="tool-chain"></div></div>
               <div class="result-block"><div class="result-label">DETECTED THREATS <span id="threat-count"></span></div><div class="threat-list" id="threat-list"></div></div>
