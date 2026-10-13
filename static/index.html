@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0a0f18">
-    <meta name="description" content="AgentGuard AI: a simulation-only security firewall for autonomous AI agents.">
+    <meta name="description" content="AgentGuard AI: Unified multi-mode cybersecurity firewall and threat analysis platform.">
     <title>AgentGuard AI</title>
     <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
     <link rel="stylesheet" href="/static/styles.css">
@@ -17,7 +17,7 @@
           <span class="brand-mark" aria-hidden="true">
             <svg viewBox="0 0 36 36" fill="none"><path d="M18 3.5 30 8v8.7c0 7.4-4.8 12.5-12 15.8C10.8 29.2 6 24.1 6 16.7V8l12-4.5Z" stroke="currentColor" stroke-width="1.7"/><path d="m12.4 18.2 3.6 3.5 7.8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
-          <span class="brand-copy"><strong>AGENTGUARD<span>AI</span></strong><small>AGENT SECURITY CONTROL PLANE</small></span>
+          <span class="brand-copy"><strong>AGENTGUARD<span>AI</span></strong><small>UNIFIED SECURITY CONTROL PLANE</small></span>
         </a>
         <div class="topbar-right">
           <span class="environment-tag"><span class="tiny-dot"></span> LOCAL SIMULATION</span>
@@ -28,18 +28,63 @@
       <main>
         <section class="hero-row">
           <div>
-            <div class="eyebrow"><span class="eyebrow-line"></span> POLICY ENFORCEMENT · LIVE DEMO</div>
+            <div class="eyebrow"><span class="eyebrow-line"></span> UNIFIED SECURITY PLATFORM · MULTI-MODE ANALYSIS</div>
             <h1>Trust the agent.<br><span>Verify every action.</span></h1>
-            <p class="hero-copy">An intelligent firewall between autonomous agents and the tools they want to use.</p>
+            <p class="hero-copy">Deterministic, explainable security guardrails for URLs, messages, prompts, autonomous agents, and raw content.</p>
           </div>
           <div class="hero-note">
             <span class="note-icon" aria-hidden="true">◎</span>
-            <div><strong>Execution is disabled</strong><span>Every tool call in this demo is simulated.</span></div>
+            <div><strong>Execution is disabled</strong><span>Simulation — No real tools executed. No links fetched.</span></div>
           </div>
         </section>
 
+        <!-- Mode Selector Navigation -->
+        <section class="mode-navigation-bar" aria-label="Security analysis modes">
+          <div class="mode-nav-heading">
+            <span class="section-kicker">SELECT SECURITY SCANNER</span>
+            <span class="mode-badge" id="active-mode-badge">MODE 04 / AGENT ACTION</span>
+          </div>
+          <nav class="mode-tabs" role="tablist">
+            <button type="button" class="mode-tab active" data-mode="agent" role="tab" aria-selected="true">
+              <span class="mode-icon">🤖</span>
+              <span class="mode-info">
+                <strong>Agent Action</strong>
+                <small>Simulated Tool Chains</small>
+              </span>
+            </button>
+            <button type="button" class="mode-tab" data-mode="url" role="tab" aria-selected="false">
+              <span class="mode-icon">🔗</span>
+              <span class="mode-info">
+                <strong>URL & Link</strong>
+                <small>Static Link Inspection</small>
+              </span>
+            </button>
+            <button type="button" class="mode-tab" data-mode="message" role="tab" aria-selected="false">
+              <span class="mode-icon">✉️</span>
+              <span class="mode-info">
+                <strong>Message / Phish</strong>
+                <small>SMS & Email Lures</small>
+              </span>
+            </button>
+            <button type="button" class="mode-tab" data-mode="prompt" role="tab" aria-selected="false">
+              <span class="mode-icon">🛡️</span>
+              <span class="mode-info">
+                <strong>Prompt Injection</strong>
+                <small>LLM Jailbreak Defense</small>
+              </span>
+            </button>
+            <button type="button" class="mode-tab" data-mode="content" role="tab" aria-selected="false">
+              <span class="mode-icon">📋</span>
+              <span class="mode-info">
+                <strong>Pasted Content</strong>
+                <small>Secrets & Commands</small>
+              </span>
+            </button>
+          </nav>
+        </section>
+
         <section class="metrics-grid" aria-label="Security metrics">
-          <article class="metric-card"><span class="metric-label">REQUESTS SCANNED</span><strong id="metric-scanned">0</strong><span class="metric-foot"><i class="metric-icon icon-scan"></i> This session</span></article>
+          <article class="metric-card"><span class="metric-label">TOTAL SCANNED</span><strong id="metric-scanned">0</strong><span class="metric-foot"><i class="metric-icon icon-scan"></i> Persistent SQLite</span></article>
           <article class="metric-card"><span class="metric-label">BLOCKED</span><strong class="metric-red" id="metric-blocked">0</strong><span class="metric-foot"><i class="metric-icon icon-block"></i> Policy denied</span></article>
           <article class="metric-card"><span class="metric-label">ALLOWED</span><strong class="metric-green" id="metric-allowed">0</strong><span class="metric-foot"><i class="metric-icon icon-scan"></i> Safe to proceed</span></article>
           <article class="metric-card"><span class="metric-label">HUMAN REVIEW</span><strong class="metric-amber" id="metric-review">0</strong><span class="metric-foot"><i class="metric-icon icon-review"></i> Approval required</span></article>
@@ -50,12 +95,17 @@
           <article class="panel scan-panel">
             <div class="panel-heading">
               <div><div class="section-kicker">01 / INSPECT</div><h2>Run a security scan</h2></div>
-              <span class="mini-tag"><span class="pulse-dot"></span> POLICY ENGINE READY</span>
+              <span class="mini-tag" id="panel-engine-status"><span class="pulse-dot"></span> POLICY ENGINE READY</span>
             </div>
-            <p class="panel-intro">Describe what the AI agent is being asked to do. AgentGuard will simulate its proposed tool plan and score it against policy.</p>
+            <p class="panel-intro" id="panel-intro">Describe what the AI agent is being asked to do. AgentGuard will simulate its proposed tool plan and score it against policy.</p>
 
-            <div class="scenario-heading"><span>DEMO SCENARIOS</span><span class="scenario-hint">Select a scenario to run its simulation</span></div>
-            <div class="scenario-list" aria-label="Demo scenarios">
+            <div class="scenario-heading">
+              <span>DEMO SCENARIOS</span>
+              <span class="scenario-hint" id="scenario-hint">Click a preset to test this scanner</span>
+            </div>
+
+            <!-- Dynamic Scenario Chips per Mode -->
+            <div class="scenario-list" id="scenario-list" aria-label="Demo scenarios">
               <button type="button" class="scenario-chip chip-benign" data-scenario="benign"><span class="chip-symbol">✓</span> Safe</button>
               <button type="button" class="scenario-chip chip-injection" data-scenario="injection"><span class="chip-symbol">⌁</span> Prompt injection</button>
               <button type="button" class="scenario-chip chip-secret" data-scenario="secret"><span class="chip-symbol">◈</span> Secret exfiltration</button>
@@ -65,11 +115,14 @@
             </div>
 
             <form id="scan-form">
-              <label for="request-input" class="input-label">AGENT REQUEST OR ATTACK SCENARIO</label>
+              <label for="request-input" class="input-label" id="input-label">AGENT REQUEST OR ATTACK SCENARIO</label>
               <textarea id="request-input" name="request" maxlength="3000" placeholder="e.g. Summarize my notes and create a short report." required></textarea>
-              <div class="input-footer"><span>Up to 3,000 characters · No execution, no external calls</span><span id="character-count">0 / 3000</span></div>
+              <div class="input-footer">
+                <span id="input-footer-note">Up to 3,000 characters · Static inspection, zero execution</span>
+                <span id="character-count">0 / 3000</span>
+              </div>
               <button class="scan-button" type="submit" id="scan-button">
-                <span class="button-shield" aria-hidden="true">⬡</span><span>Run security scan</span><span class="button-arrow" aria-hidden="true">↗</span>
+                <span class="button-shield" aria-hidden="true">⬡</span><span id="scan-button-text">Run security scan</span><span class="button-arrow" aria-hidden="true">↗</span>
               </button>
               <p class="form-error" id="form-error" role="alert" hidden></p>
             </form>
@@ -79,12 +132,15 @@
           <article class="panel result-panel" id="result-panel" aria-live="polite">
             <div class="panel-heading result-heading">
               <div><div class="section-kicker">02 / ENFORCE</div><h2>Security Analysis</h2></div>
-              <span class="result-sequence" id="result-sequence">AWAITING SCAN</span>
+              <div class="result-header-tags">
+                <span class="mode-tag-pill" id="result-mode-tag">AGENT ACTION</span>
+                <span class="result-sequence" id="result-sequence">AWAITING SCAN</span>
+              </div>
             </div>
             <div class="empty-result" id="empty-result">
               <div class="empty-shield" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M24 5 40 11v11.6c0 9.9-6.4 16.7-16 21.1C14.4 39.3 8 32.5 8 22.6V11l16-6Z" stroke="currentColor" stroke-width="1.5"/><path d="M17 24h14M24 17v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
               <strong>Ready to inspect</strong>
-              <span>Choose a scenario or enter an agent request to see the firewall in action.</span>
+              <span>Choose a scenario or enter content to inspect the security control plane in action.</span>
             </div>
             <div class="scan-result" id="scan-result" hidden>
               <div class="decision-row">
@@ -101,56 +157,63 @@
                 <div class="risk-meter-scale"><span>0 · LOW</span><span>100 · HIGH</span></div>
               </div>
               <div class="intel-panel" id="threat-intelligence">
-  <div class="intel-heading">
-    <span class="intel-icon">◈</span>
-    <div>
-      <strong>THREAT INTELLIGENCE</strong>
-      <small>SIMULATED POLICY ANALYSIS</small>
-    </div>
-    <span class="intel-live">● ANALYZED</span>
-  </div>
+                <div class="intel-heading">
+                  <span class="intel-icon">◈</span>
+                  <div>
+                    <strong>THREAT INTELLIGENCE</strong>
+                    <small>DETERMINISTIC HEURISTIC ANALYSIS</small>
+                  </div>
+                  <span class="intel-live">● ANALYZED</span>
+                </div>
 
-  <div class="intel-grid">
-    <div class="intel-stat">
-      <span>RISK BAND</span>
-      <strong id="intel-risk-band">PENDING</strong>
-    </div>
-    <div class="intel-stat">
-      <span>THREATS FOUND</span>
-      <strong id="intel-threat-total">0</strong>
-    </div>
-    <div class="intel-stat">
-      <span>POLICY STATUS</span>
-      <strong id="intel-policy-status">WAITING</strong>
-    </div>
-  </div>
+                <div class="intel-grid">
+                  <div class="intel-stat">
+                    <span>RISK BAND</span>
+                    <strong id="intel-risk-band">PENDING</strong>
+                  </div>
+                  <div class="intel-stat">
+                    <span>THREATS FOUND</span>
+                    <strong id="intel-threat-total">0</strong>
+                  </div>
+                  <div class="intel-stat">
+                    <span>POLICY STATUS</span>
+                    <strong id="intel-policy-status">WAITING</strong>
+                  </div>
+                </div>
 
-  <div class="intel-bars" id="intel-bars">
-    <div class="intel-bar-row">
-      <span>Prompt manipulation</span>
-      <div class="intel-track"><span id="intel-prompt-bar"></span></div>
-      <strong id="intel-prompt-value">—</strong>
-    </div>
-    <div class="intel-bar-row">
-      <span>Data exposure</span>
-      <div class="intel-track"><span id="intel-data-bar"></span></div>
-      <strong id="intel-data-value">—</strong>
-    </div>
-    <div class="intel-bar-row">
-      <span>Privilege / destructive risk</span>
-      <div class="intel-track"><span id="intel-action-bar"></span></div>
-      <strong id="intel-action-value">—</strong>
-    </div>
-  </div>
+                <div class="intel-bars" id="intel-bars">
+                  <div class="intel-bar-row">
+                    <span>Prompt manipulation</span>
+                    <div class="intel-track"><span id="intel-prompt-bar"></span></div>
+                    <strong id="intel-prompt-value">—</strong>
+                  </div>
+                  <div class="intel-bar-row">
+                    <span>Data exposure</span>
+                    <div class="intel-track"><span id="intel-data-bar"></span></div>
+                    <strong id="intel-data-value">—</strong>
+                  </div>
+                  <div class="intel-bar-row">
+                    <span>Privilege / destructive risk</span>
+                    <div class="intel-track"><span id="intel-action-bar"></span></div>
+                    <strong id="intel-action-value">—</strong>
+                  </div>
+                </div>
 
-  <p class="intel-disclaimer">
-    These indicators summarize detected categories. They are not independent
-    probabilities or a separate AI model.
-  </p>
-</div>
+                <p class="intel-disclaimer">
+                  These indicators summarize detected deterministic patterns. They are static heuristic signals, not live external threat feed lookups.
+                </p>
+              </div>
+
               <div class="result-divider"></div>
               <div class="result-block"><div class="result-label">PROPOSED TOOL / ACTION</div><div class="tool-chain" id="tool-chain"></div></div>
               <div class="result-block"><div class="result-label">DETECTED THREATS <span id="threat-count"></span></div><div class="threat-list" id="threat-list"></div></div>
+              
+              <!-- Key Indicators Section -->
+              <div class="result-block" id="indicators-block" hidden>
+                <div class="result-label">RISK INDICATORS EXPLAINED</div>
+                <ul class="indicators-list" id="indicators-list"></ul>
+              </div>
+
               <div class="explanation-box"><div class="explanation-title"><span>✳</span> WHY THIS DECISION?</div><p id="decision-reason"></p></div>
               <div class="recommendation"><span class="recommend-icon">↳</span><div><span>RECOMMENDED ACTION</span><p id="recommended-action"></p></div></div>
             </div>
@@ -158,7 +221,14 @@
         </section>
 
         <section class="flow-panel panel">
-          <div class="flow-heading"><div><div class="section-kicker">THE ENFORCEMENT POINT</div><h2>Agent Tool Chain</h2><p class="toolchain-subtitle">Proposed actions are inspected before a simulated security decision.</p></div><span class="flow-caption">SIMULATION · NO EXECUTION</span></div>
+          <div class="flow-heading">
+            <div>
+              <div class="section-kicker">THE ENFORCEMENT POINT</div>
+              <h2>Agent Tool Chain</h2>
+              <p class="toolchain-subtitle" id="toolchain-subtitle">Proposed actions are inspected before a simulated security decision.</p>
+            </div>
+            <span class="flow-caption">SIMULATION · NO EXECUTION</span>
+          </div>
           <div class="toolchain-viewport">
             <div class="toolchain-flow" id="toolchain-flow" aria-label="Simulated agent tool chain">
               <span class="toolchain-node agent-node">AI Agent</span>
@@ -175,21 +245,50 @@
 
         <section class="audit-panel panel">
           <div class="audit-heading">
-            <div><div class="section-kicker">03 / OBSERVE</div><h2>Security Audit Log</h2><p>Recent decisions from this browser session.</p></div>
+            <div>
+              <div class="section-kicker">03 / OBSERVE</div>
+              <h2>Security Audit Log</h2>
+              <p>Persistent scan history stored securely with credential redaction.</p>
+            </div>
             <div class="audit-tools">
-              <span class="audit-live" id="audit-status"><i></i> SESSION ONLY · LAST 100 EVENTS</span>
-              <button type="button" class="clear-log-button" id="clear-audit-log">Clear Log</button>
+              <div class="audit-filter-group">
+                <label for="audit-filter" class="audit-filter-label">FILTER:</label>
+                <select id="audit-filter" class="audit-filter-select">
+                  <option value="all">All Modes</option>
+                  <option value="agent">Agent Actions</option>
+                  <option value="url">URLs</option>
+                  <option value="message">Messages</option>
+                  <option value="prompt">Prompt Injections</option>
+                  <option value="content">Pasted Content</option>
+                </select>
+              </div>
+              <span class="audit-live" id="audit-status"><i></i> SQLITE PERSISTENT LOG</span>
+              <button type="button" class="clear-log-button" id="clear-audit-log">Clear History</button>
             </div>
           </div>
           <div class="audit-table-wrap">
             <table>
-              <thead><tr><th>TIMESTAMP</th><th>AGENT ACTION</th><th>RISK SCORE</th><th>DECISION</th><th>DETECTED THREATS</th></tr></thead>
-              <tbody id="audit-body"><tr class="audit-empty"><td colspan="5">No scan events yet. Run a scenario to populate the audit log.</td></tr></tbody>
+              <thead>
+                <tr>
+                  <th>TIMESTAMP</th>
+                  <th>MODE</th>
+                  <th>AGENT ACTION / TARGET</th>
+                  <th>RISK SCORE</th>
+                  <th>DECISION</th>
+                  <th>DETECTED THREATS</th>
+                </tr>
+              </thead>
+              <tbody id="audit-body">
+                <tr class="audit-empty"><td colspan="6">No scan events yet. Run a scenario to populate the audit log.</td></tr>
+              </tbody>
             </table>
           </div>
         </section>
       </main>
-      <footer class="footer"><span>AGENTGUARD AI <i>·</i> HACKATHON PROTOTYPE</span><span>SIMULATION ONLY <i>·</i> NO TOOLS CONNECTED</span></footer>
+      <footer class="footer">
+        <span>AGENTGUARD AI <i>·</i> UNIFIED CYBERSECURITY PLATFORM</span>
+        <span>STATIC ANALYSIS & SIMULATION <i>·</i> ZERO EXTERNAL CALLS</span>
+      </footer>
     </div>
   </body>
 </html>

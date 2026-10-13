@@ -396,3 +396,222 @@ td:first-child { color: #7a8ba0; font: 8px "DM Mono", Consolas, monospace; white
     gap: 5px;
   }
 }
+
+
+/* ==========================================================================
+   MULTI-MODE SCANNER STYLES (AGENTGUARD AI 2.0)
+   ========================================================================== */
+
+.mode-navigation-bar {
+  margin-bottom: 16px;
+  padding: 14px 18px;
+  border: 1px solid var(--stroke);
+  border-radius: 9px;
+  background: linear-gradient(145deg, rgba(17, 26, 39, .92), rgba(12, 19, 29, .95));
+}
+
+.mode-nav-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.mode-badge {
+  font-family: "DM Mono", Consolas, monospace;
+  font-size: 9px;
+  letter-spacing: .08em;
+  color: var(--cyan);
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(99, 223, 208, .08);
+  border: 1px solid rgba(99, 223, 208, .2);
+}
+
+.mode-tabs {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 9px;
+}
+
+.mode-tab {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 12px;
+  border: 1px solid var(--stroke);
+  border-radius: 7px;
+  background: #0d141f;
+  color: #9cb0c5;
+  cursor: pointer;
+  text-align: left;
+  transition: all .18s ease;
+}
+
+.mode-tab:hover {
+  background: #141f2e;
+  border-color: #3b4d63;
+  transform: translateY(-1px);
+  color: var(--text);
+}
+
+.mode-tab.active {
+  background: linear-gradient(135deg, rgba(99, 223, 208, .12), rgba(39, 127, 145, .2));
+  border-color: var(--cyan);
+  color: var(--text);
+  box-shadow: 0 0 14px rgba(99, 223, 208, .15);
+}
+
+.mode-icon {
+  font-size: 17px;
+}
+
+.mode-info {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.mode-info strong {
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mode-info small {
+  font-size: 8px;
+  color: var(--muted);
+  font-family: "DM Mono", Consolas, monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mode-tab.active .mode-info small {
+  color: var(--cyan);
+}
+
+/* Result Header Tags */
+.result-header-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mode-tag-pill {
+  font-family: "DM Mono", Consolas, monospace;
+  font-size: 8px;
+  letter-spacing: .06em;
+  color: var(--cyan);
+  padding: 4px 8px;
+  background: rgba(99, 223, 208, .1);
+  border: 1px solid rgba(99, 223, 208, .25);
+  border-radius: 4px;
+}
+
+/* Indicators List */
+.indicators-list {
+  margin: 7px 0 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 5px;
+}
+
+.indicators-list li {
+  font-size: 10px;
+  line-height: 1.5;
+  color: #cfdbe8;
+}
+
+/* Audit Filter & Pills */
+.audit-filter-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 8px;
+}
+
+.audit-filter-label {
+  font-family: "DM Mono", Consolas, monospace;
+  font-size: 8px;
+  color: var(--dim);
+}
+
+.audit-filter-select {
+  padding: 4px 8px;
+  font-family: "DM Mono", Consolas, monospace;
+  font-size: 9px;
+  background: #0d141f;
+  color: var(--text);
+  border: 1px solid var(--stroke);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.audit-filter-select:focus {
+  outline: none;
+  border-color: var(--cyan);
+}
+
+.audit-mode-cell {
+  white-space: nowrap;
+}
+
+.audit-mode-pill {
+  display: inline-block;
+  padding: 3px 6px;
+  font-size: 8px;
+  font-family: "DM Mono", Consolas, monospace;
+  border-radius: 3px;
+  font-weight: 600;
+  letter-spacing: .04em;
+}
+
+.mode-agent {
+  background: rgba(120, 184, 255, .12);
+  color: #78b8ff;
+  border: 1px solid rgba(120, 184, 255, .25);
+}
+
+.mode-url {
+  background: rgba(99, 223, 208, .12);
+  color: var(--cyan);
+  border: 1px solid rgba(99, 223, 208, .25);
+}
+
+.mode-message {
+  background: rgba(244, 185, 95, .12);
+  color: var(--amber);
+  border: 1px solid rgba(244, 185, 95, .25);
+}
+
+.mode-prompt {
+  background: rgba(178, 154, 255, .12);
+  color: var(--violet);
+  border: 1px solid rgba(178, 154, 255, .25);
+}
+
+.mode-content {
+  background: rgba(255, 105, 122, .12);
+  color: var(--red);
+  border: 1px solid rgba(255, 105, 122, .25);
+}
+
+@media (max-width: 990px) {
+  .mode-tabs {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .mode-tabs {
+    grid-template-columns: 1fr;
+  }
+  .audit-tools {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
